@@ -41,7 +41,7 @@ public class SimpleLinearRegressionAgent extends Agent {
         model = SimpleLinearRegression.generateModel(dataSet);
         System.out.println(model);
         for ( Double x : valuesToPredict ) {
-          System.out.println("x = " + x + ", y ---> " + model.predict(x));
+          System.out.println("x = " + x + ", y ---> " + model.predict(new Object[]{ x }));
         }
       } catch ( Exception ex ) {
         ex.printStackTrace();

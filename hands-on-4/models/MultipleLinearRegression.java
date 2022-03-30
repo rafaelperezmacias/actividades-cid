@@ -89,7 +89,7 @@ public class MultipleLinearRegression extends Regression {
         }
 
         @Override
-        public Double predict(Object... instance) throws Exception {
+        public Double predict(Object[] instance) throws Exception {
             if ( instance.length != dataSet.getHeaders().size() - 1 ) {
                 throw new Exception("The instance is not the same size as the data set (" + instance.length + " - " + (dataSet.getHeaders().size() - 1) + ")");
             }
@@ -114,14 +114,14 @@ public class MultipleLinearRegression extends Regression {
             dataSet.getHeaders().add(classNameOut);
             dataSet.getAttributeTypes().add(DataSet.NUMERIC_TYPE);
             for ( ArrayList<String> instance : dataSet.getInstances() ) {
-                double[] values = new double[instance.size() - 1];
+                Object[] values = new Object[instance.size() - 1];
                 for ( int i = 0, j = 0; i < instance.size(); i++ ) {
                     if ( i == idxY ) {
                         continue;
                     }
                     values[j++] = Double.parseDouble(instance.get(i));
                 }
-                instance.add(String.valueOf(predict(values)));
+                instance.add(String.valueOf(predict( values )));
             }
         }
 

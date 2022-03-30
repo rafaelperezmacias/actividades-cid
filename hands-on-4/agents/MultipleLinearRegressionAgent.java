@@ -24,19 +24,21 @@ public class MultipleLinearRegressionAgent extends Agent {
         model = MultipleLinearRegression.generateModel(dataSet);
         System.out.println(model);
         while (true) {
-            String input = JOptionPane.showInputDialog(null, "Ingrese los valores de x_1 y x_2 separados por una coma");
+            String input = JOptionPane.showInputDialog(null, "Ingrese los valores de la instancia separados por una coma");
             if ( input == null || input.equals("q") ) {
               break;
             }
             String[] variables = input.split(",");
-            if ( variables.length != 2 ) {
+            if ( variables.length != dataSet.getHeaders().size() - 1 ) {
                 System.out.println("No se pudo realizar la predicion, numero de parametros invalido");
                 continue;
             }
             try {
-                double x1 = Double.parseDouble(variables[0]);
-                double x2 = Double.parseDouble(variables[1]);
-                System.out.println("y ---> " + model.predict(x1,x2) );
+                Object[] values = new Object[variables.length];
+                for ( int i = 0; i < variables.length; i++ ) {
+                  values[i] = Double.parseDouble(variables[i]);
+                }
+                System.out.println("y ---> " + model.predict(values) );
             } catch (Exception ex) {
                 System.out.println("Los parametros no son numericos");
                 continue;

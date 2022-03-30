@@ -71,7 +71,7 @@ public class SimpleLinearRegression extends Regression {
         }
 
         @Override
-        public Double predict(Object... instance) throws Exception {
+        public Double predict(Object[] instance) throws Exception {
             if ( instance.length != dataSet.getHeaders().size() - 1) {
                 throw new Exception("The instance is not the same size as the data set (" + instance.length + " - " + ( dataSet.getHeaders().size() - 1) + ")");
             }
@@ -91,7 +91,7 @@ public class SimpleLinearRegression extends Regression {
             dataSet.getAttributeTypes().add(DataSet.NUMERIC_TYPE);
             for ( ArrayList<String> instance : dataSet.getInstances() ) {
                 double x = Double.parseDouble(instance.get(idxX));
-                instance.add(String.valueOf(predict(x)));
+                instance.add(String.valueOf(predict(new Object[]{ x })));
             }
         }
 
