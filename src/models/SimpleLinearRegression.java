@@ -3,8 +3,6 @@ package models;
 import utils.AritmeticHelpers;
 import utils.DataSet;
 
-import java.util.ArrayList;
-
 public class SimpleLinearRegression extends Regression {
 
     private SimpleLinearRegression()
@@ -14,11 +12,16 @@ public class SimpleLinearRegression extends Regression {
 
     public static Model generateModel(DataSet dataSet) throws Exception {
         SimpleLinearRegression slr = new SimpleLinearRegression();
-        return (Model) slr.makeModel(dataSet);
+        return slr.makeModel(dataSet);
     }
 
     @Override
-    protected AbstractModel<Double> makeModel(DataSet dataSet) throws Exception {
+    protected Model makeModel(DataSet dataSet) throws Exception {
+        return makeModel(dataSet, null);
+    }
+
+    @Override
+    protected Model makeModel(DataSet dataSet, AbstractParams params) throws Exception {
         validateDataSet(dataSet);
         int idxY = DataSetFunctions.getIndexAtAtributeFromDataSet(dataSet.getHeaders(), dataSet.getTarget());
         if ( idxY == -1 ) {
@@ -30,17 +33,37 @@ public class SimpleLinearRegression extends Regression {
         double[] XVector = DataSetFunctions.generateNumericVector(dataSet, idxX);
         double[] YVector = DataSetFunctions.generateNumericVector(dataSet, idxY);
 
-        double summationXY = AritmeticHelpers.productSummation(XVector, YVector);
-        double summationX = AritmeticHelpers.sumSummation(XVector);
-        double summationY = AritmeticHelpers.sumSummation(YVector);
-        double summationSquareX = AritmeticHelpers.squareSummation(XVector);
+        double summationXY = AritmeticHelpers.summation(new AritmeticHelpers.SummationExpression() {
+            @Override
+            public double result(int pos) {
+                return XVector[pos] * YVector[pos];
+            }
+        }, new double[][]{ XVector, YVector });
+        double summationX = AritmeticHelpers.summation(new AritmeticHelpers.SummationExpression() {
+            @Override
+            public double result(int pos) {
+                return XVector[pos];
+            }
+        }, new double[][]{ XVector });
+        double summationY = AritmeticHelpers.summation(new AritmeticHelpers.SummationExpression() {
+            @Override
+            public double result(int pos) {
+                return YVector[pos];
+            }
+        }, new double[][]{ YVector });
+        double summationSquareX = AritmeticHelpers.summation(new AritmeticHelpers.SummationExpression() {
+            @Override
+            public double result(int pos) {
+                return XVector[pos] * XVector[pos];
+            }
+        }, new double[][]{ XVector });
 
         int n = dataSet.getInstances().size();
 
         double beta1 = ( (n * summationXY) - (summationX * summationY) ) / ((n * summationSquareX) - (summationX * summationX));
         double beta0 = ( summationY - ( beta1 * summationX ) ) / n;
 
-        return new SimpleLinearRegression.Model(dataSet,beta0,beta1, idxX);
+        return new SimpleLinearRegression.Model(dataSet, beta0, beta1, idxX);
     }
 
     private static void validateDataSet(DataSet dataSet) throws Exception {
@@ -83,16 +106,7 @@ public class SimpleLinearRegression extends Regression {
 
         @Override
         public void predict(DataSet dataSet, String classNameOut) throws Exception {
-            validateDataSet(dataSet);
-            if ( !DataSetFunctions.isEqualsTheDataSets(this.dataSet, dataSet) ) {
-                throw new Exception("The data sets are not equal");
-            }
-            dataSet.getHeaders().add(classNameOut);
-            dataSet.getAttributeTypes().add(DataSet.NUMERIC_TYPE);
-            for ( ArrayList<String> instance : dataSet.getInstances() ) {
-                double x = Double.parseDouble(instance.get(idxX));
-                instance.add(String.valueOf(predict(new Object[]{ x })));
-            }
+            throw new Exception("Not implemented yet");
         }
 
         @Override

@@ -19,18 +19,17 @@ public class DataSetFunctions {
         if ( dataSet.getAttributeTypes() == null || dataSet.getAttributeTypes().isEmpty() ) {
             throw new Exception("The data set not contains the types of atributes");
         }
+        if ( dataSet.getHeaders().size() != dataSet.getAttributeTypes().size() ) {
+            throw new Exception("The number of headers is not the same as the number of types attributes");
+        }
+        for ( int i = 0; i < dataSet.getInstances().size(); i++ ) {
+            if ( dataSet.getInstances().get(i).size() != dataSet.getHeaders().size() ) {
+                throw new Exception("Instance number " + i + " does not have the same number of attributes as the headers");
+            }
+        }
         if ( dataSet.getTarget() == null ) {
             throw new Exception("The data set not contains the target");
         }
-    }
-
-    public static boolean isEqualsTheDataSets(DataSet a, DataSet b) {
-        for ( int i = 0; i < a.getHeaders().size(); i++ ) {
-            if ( !a.getHeaders().get(i).equalsIgnoreCase(b.getHeaders().get(i)) ) {
-                return false;
-            }
-        }
-        return a.getHeaders().size() == b.getHeaders().size();
     }
 
     public static int getIndexAtAtributeFromDataSet(ArrayList<String> headers, String atribute) {
@@ -67,4 +66,5 @@ public class DataSetFunctions {
         }
         return matrix;
     }
+
 }

@@ -3,8 +3,6 @@ package models;
 import utils.AlgebraicHelpers;
 import utils.DataSet;
 
-import java.util.ArrayList;
-
 public class MultipleLinearRegression extends Regression {
 
     private MultipleLinearRegression()
@@ -14,18 +12,23 @@ public class MultipleLinearRegression extends Regression {
 
     public static Model generateModel(DataSet dataSet) throws Exception {
         MultipleLinearRegression regression = new MultipleLinearRegression();
-        return (Model) regression.makeModel(dataSet);
+        return regression.makeModel(dataSet);
     }
 
     @Override
-    protected AbstractModel<Double> makeModel(DataSet dataSet) throws Exception {
+    protected Model makeModel(DataSet dataSet) throws Exception {
+        return makeModel(dataSet, null);
+    }
+
+    @Override
+    protected Model makeModel(DataSet dataSet, AbstractParams params) throws Exception {
         validateDataSet(dataSet);
         int idxY = DataSetFunctions.getIndexAtAtributeFromDataSet(dataSet.getHeaders(), dataSet.getTarget());
         if ( idxY == -1 ) {
             throw new Exception("Target not found");
         }
 
-        double[][] X = generateAXMatrix(DataSetFunctions.generateNumericMatrix(dataSet, getColumns(dataSet, idxY)));
+        double[][] X = generateAnXMatrix(DataSetFunctions.generateNumericMatrix(dataSet, getColumns(dataSet, idxY)));
         double[][] Y = DataSetFunctions.generateNumericMatrix(dataSet, idxY);
 
         double[][] XTranposed = AlgebraicHelpers.transpose(X);
@@ -39,7 +42,7 @@ public class MultipleLinearRegression extends Regression {
         return new Model(dataSet, AlgebraicHelpers.getVectorOfTheMatrix(result, 0), idxY);
     }
 
-    private static double[][] generateAXMatrix(double[][] matrix) {
+    private static double[][] generateAnXMatrix(double[][] matrix) {
         double[][] newMatrix = new double[matrix.length][matrix[0].length + 1];
         for ( int i = 0; i < matrix.length; i++ ) {
             newMatrix[i][0] = 1;
@@ -107,22 +110,7 @@ public class MultipleLinearRegression extends Regression {
 
         @Override
         public void predict(DataSet dataSet, String classNameOut) throws Exception {
-            validateDataSet(dataSet);
-            if ( !DataSetFunctions.isEqualsTheDataSets(this.dataSet, dataSet) ) {
-                throw new Exception("The data sets are not equal");
-            }
-            dataSet.getHeaders().add(classNameOut);
-            dataSet.getAttributeTypes().add(DataSet.NUMERIC_TYPE);
-            for ( ArrayList<String> instance : dataSet.getInstances() ) {
-                Object[] values = new Object[instance.size() - 1];
-                for ( int i = 0, j = 0; i < instance.size(); i++ ) {
-                    if ( i == idxY ) {
-                        continue;
-                    }
-                    values[j++] = Double.parseDouble(instance.get(i));
-                }
-                instance.add(String.valueOf(predict( values )));
-            }
+            throw new Exception("Not implemented yet");
         }
 
         @Override

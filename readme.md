@@ -1,45 +1,77 @@
 # Hands-On
 
-
 ## Hands-On 2
 
 ### Agent
 
-hands-on-2/agents/SimpleLinearRegressionAgent
+/src/agents/SimpleLinearRegressionAgent
 
-### SLR & Helpers classes
+### SLR & Helpers
 
-hands-on-2/models/AbstractModel
-
-hands-on-2/models/DataSetFunctions
-
-hands-on-2/models/Regression
-
-hands-on-2/models/SimpleLinearRegression
-
-hands-on-2/utils/AritmeticHelpers
-
-hands-on-2/utils/DataSet
-
+/src/models/AbstractModel
+/src/models/DataSetFunctions
+/src/models/Regression
+/src/models/SimpleLinearRegression
+/src/utils/AritmeticHelpers
+/src/utils/DataSet
 
 ## Hands-On 4
 
 ### Agent
 
-hands-on-4/agents/MultipleLinearRegressionAgent
+/src/agents/MultipleLinearRegressionAgent
 
-### MLR & Helpers classes
+### MLR & Helpers
 
-hands-on-4/models/AbstractModel
+/src/models/AbstractModel
+/src/models/DataSetFunctions
+/src/models/Regression
+/src/models/MultipleLinearRegression
+/src/utils/AlgebraicHelpers
+/src/utils/AritmeticHelpers
+/src/utils/DataSet
 
-hands-on-4/models/DataSetFunctions
+## Hands-On 5
 
-hands-on-4/models/MultipleLinearRegression
+### Agent
 
-hands-on-4/models/Regression
+/src/agents/GradientDescentAgent
 
-hands-on-4/utils/AlgebraicHelpers
+### GD & Helpers
 
-hands-on-4/utils/AritmeticHelpers
+/src/models/AbstractModel
+/src/models/DataSetFunctions
+/src/models/Regression
+/src/models/GradientDescent
+/src/utils/AritmeticHelpers
+/src/utils/DataSet
 
-hands-on-4/utils/DataSet
+## Hands-On 7
+
+### Agent
+
+/src/agents/LogisticRegressionAgent
+
+### LR & Helpers
+
+/src/models/AbstractModel
+/src/models/Classification
+/src/models/DataSetFunctions
+/src/models/LogisticRegression
+/src/utils/AritmeticHelpers
+/src/utils/DataSet
+
+## Hands-On 8
+
+### Agent
+
+/src/agents/KNNAgent
+
+### KNN & Helpers
+
+/src/models/AbstractModel
+/src/models/Classification
+/src/models/DataSetFunctions
+/src/models/KNN
+/src/utils/AritmeticHelpers
+/src/utils/DataSet
