@@ -9,10 +9,15 @@
 ### SLR & Helpers
 
 /src/models/AbstractModel
+
 /src/models/DataSetFunctions
+
 /src/models/Regression
+
 /src/models/SimpleLinearRegression
+
 /src/utils/AritmeticHelpers
+
 /src/utils/DataSet
 
 ## Hands-On 4
@@ -24,11 +29,17 @@
 ### MLR & Helpers
 
 /src/models/AbstractModel
+
 /src/models/DataSetFunctions
+
 /src/models/Regression
+
 /src/models/MultipleLinearRegression
+
 /src/utils/AlgebraicHelpers
+
 /src/utils/AritmeticHelpers
+
 /src/utils/DataSet
 
 ## Hands-On 5
@@ -40,10 +51,15 @@
 ### GD & Helpers
 
 /src/models/AbstractModel
+
 /src/models/DataSetFunctions
+
 /src/models/Regression
+
 /src/models/GradientDescent
+
 /src/utils/AritmeticHelpers
+
 /src/utils/DataSet
 
 ## Hands-On 7
@@ -55,10 +71,15 @@
 ### LR & Helpers
 
 /src/models/AbstractModel
+
 /src/models/Classification
+
 /src/models/DataSetFunctions
+
 /src/models/LogisticRegression
+
 /src/utils/AritmeticHelpers
+
 /src/utils/DataSet
 
 ## Hands-On 8
@@ -70,8 +91,13 @@
 ### KNN & Helpers
 
 /src/models/AbstractModel
+
 /src/models/Classification
+
 /src/models/DataSetFunctions
+
 /src/models/KNN
+
 /src/utils/AritmeticHelpers
+
 /src/utils/DataSet
